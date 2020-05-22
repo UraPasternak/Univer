@@ -1,4 +1,4 @@
-package ua.lviv.ura.Univer;
+package ua.lviv.ura.univer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
