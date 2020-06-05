@@ -2,10 +2,30 @@ package ua.lviv.ura.univer.domain;
 
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="atestat")
 public class Atestat {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@Column
 	private Integer userId;
+	
+	@ElementCollection(targetClass = Predmet.class)
+	@Enumerated(EnumType.STRING) 
+	@Column( name="Predmet") 
 	private Map<Predmet, Integer> otsinky;
 	
 	public Atestat() {}

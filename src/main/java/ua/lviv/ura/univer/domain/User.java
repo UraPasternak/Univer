@@ -1,7 +1,17 @@
 package ua.lviv.ura.univer.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String email;
 	private String lastName;
@@ -10,6 +20,15 @@ public class User {
 	private UserRole role;
 	
 	public User() {}
+	
+	public User(User user) {
+		this.id = user.id;
+		this.email = user.email;
+		this.lastName = user.lastName;
+		this.firstName = user.firstName;
+		this.password = user.password;
+		this.role = user.role;
+	}
 
 	public User(String email, String lastName, String firstName, String password, UserRole role) {
 		

@@ -2,10 +2,30 @@ package ua.lviv.ura.univer.domain;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name="faculty")
 public class Facultet {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@Column
 	private String name;
+	
+	@ElementCollection(targetClass = User.class)
+	@CollectionTable(name="User", joinColumns = @JoinColumn(name="FACULTY_ID") ) 
+	@Column( name="User", nullable=false ) 
 	private List<User> students;
 	
 	public Facultet() {}
