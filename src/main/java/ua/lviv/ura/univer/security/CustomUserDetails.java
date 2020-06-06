@@ -10,16 +10,17 @@ import org.springframework.util.StringUtils;
 
 import ua.lviv.ura.univer.domain.User;
 
-public class CustomUserDetails extends User implements UserDetails {
+
+public class CustomUserDetails extends User implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
 	private List<String> userRoles;
-	
+
 	public CustomUserDetails(User user, List<String> userRoles) {
 		super(user);
 		this.userRoles = userRoles;
 	}
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
@@ -28,31 +29,26 @@ public class CustomUserDetails extends User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		
-		return super.getFirstName();
+		return super.getEmail();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		
 		return true;
 	}
 
