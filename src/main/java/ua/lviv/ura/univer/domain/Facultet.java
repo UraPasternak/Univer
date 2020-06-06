@@ -13,35 +13,38 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name="faculty")
+@Table(name = "faculty")
 public class Facultet {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
 	@Column
 	private String name;
-	
-	@ElementCollection(targetClass = User.class)
-	@CollectionTable(name="User", joinColumns = @JoinColumn(name="FACULTY_ID") ) 
-	@Column( name="User", nullable=false ) 
-	private List<User> students;
-	
-	public Facultet() {}
+	@Column
+	private Integer numberOfStudents;
 
-	public Facultet(String name, List<User> students) {
-		
-		this.name = name;
-		this.students = students;
-	}
+	@ElementCollection(targetClass = Predmet.class)
+	@CollectionTable(name = "Predmet", joinColumns = @JoinColumn(name = "FACULTY_ID"))
+	@Column(name = "Predmet", nullable = false)
+	private List<Predmet> predmets;
 
-	public Facultet(Integer id, String name, List<User> students) {
+public Facultet() {}
 
-		this.id = id;
-		this.name = name;
-		this.students = students;
-	}
+public Facultet(String name, Integer numberOfStudents, List<Predmet> predmets) {
+	super();
+	this.name = name;
+	this.numberOfStudents = numberOfStudents;
+	this.predmets = predmets;
+}
+
+public Facultet(Integer id, String name, Integer numberOfStudents, List<Predmet> predmets) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.numberOfStudents = numberOfStudents;
+	this.predmets = predmets;
+}
 
 	public Integer getId() {
 		return id;
@@ -59,12 +62,20 @@ public class Facultet {
 		this.name = name;
 	}
 
-	public List<User> getStudents() {
-		return students;
+	public Integer getNumberOfStudents() {
+		return numberOfStudents;
 	}
 
-	public void setStudents(List<User> students) {
-		this.students = students;
+	public void setNumberOfStudents(Integer numberOfStudents) {
+		this.numberOfStudents = numberOfStudents;
+	}
+
+	public List<Predmet> getPredmets() {
+		return predmets;
+	}
+
+	public void setPredmets(List<Predmet> predmets) {
+		this.predmets = predmets;;
 	}
 
 	@Override
@@ -73,7 +84,8 @@ public class Facultet {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((students == null) ? 0 : students.hashCode());
+		result = prime * result + ((numberOfStudents == null) ? 0 : numberOfStudents.hashCode());
+		result = prime * result + ((predmets == null) ? 0 : predmets.hashCode());
 		return result;
 	}
 
@@ -96,17 +108,23 @@ public class Facultet {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (students == null) {
-			if (other.students != null)
+		if (numberOfStudents == null) {
+			if (other.numberOfStudents != null)
 				return false;
-		} else if (!students.equals(other.students))
+		} else if (!numberOfStudents.equals(other.numberOfStudents))
+			return false;
+		if (predmets == null) {
+			if (other.predmets != null)
+				return false;
+		} else if (!predmets.equals(other.predmets))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Facultet [id=" + id + ", name=" + name + ", students=" + students + "]";
+		return "Facultet [id=" + id + ", name=" + name + ", numberOfStudents=" + numberOfStudents + ", predmets="
+				+ predmets + "]";
 	}
-		
+
 }

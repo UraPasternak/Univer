@@ -1,6 +1,8 @@
 package ua.lviv.ura.univer.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,44 +11,48 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	private String email;
-	private String lastName;
 	private String firstName;
+	private String lastName;
 	private String password;
+	private String passwordConfirm;
+	
+	@Enumerated(EnumType.STRING)
 	private UserRole role;
 	
-	public User() {}
+	public User() {	}
 	
 	public User(User user) {
-		this.id = user.id;
-		this.email = user.email;
-		this.lastName = user.lastName;
-		this.firstName = user.firstName;
-		this.password = user.password;
-		this.role = user.role;
+		this.email = user.getEmail();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.role = user.getRole();
+		this.password = user.getPassword();
+		
 	}
 
-	public User(String email, String lastName, String firstName, String password, UserRole role) {
-		
+	public User(String email, String firstName, String lastName, UserRole role, String password) {
 		this.email = email;
-		this.lastName = lastName;
 		this.firstName = firstName;
-		this.password = password;
+		this.lastName = lastName;
 		this.role = role;
+		this.password = password;
+		
 	}
 
-	public User(Integer id, String email, String lastName, String firstName, String password, UserRole role) {
-		
+	public User(Integer id, String email, String firstName, String lastName, UserRole role, String password) {
 		this.id = id;
 		this.email = email;
-		this.lastName = lastName;
 		this.firstName = firstName;
-		this.password = password;
+		this.lastName = lastName;
 		this.role = role;
+		this.password = password;
+	
 	}
 
 	public Integer getId() {
@@ -65,6 +71,14 @@ public class User {
 		this.email = email;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -73,12 +87,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public UserRole getRole() {
+		return role;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 
 	public String getPassword() {
@@ -89,12 +103,12 @@ public class User {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
-		return role;
+	public String getPasswordConfirm() {
+		return passwordConfirm;
 	}
 
-	public void setRole(UserRole role) {
-		this.role = role;
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
 	}
 
 	@Override
@@ -151,8 +165,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", lastName=" + lastName + ", firstName=" + firstName
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", password=" + password + ", role=" + role + "]";
-	}
-		
+	}	
 }
