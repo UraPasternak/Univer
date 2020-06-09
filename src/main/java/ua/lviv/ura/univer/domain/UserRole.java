@@ -1,6 +1,6 @@
 package ua.lviv.ura.univer.domain;
 
 public enum UserRole {
-	ADMIN, USER;
+	ROLE_ADMIN, ROLE_USER;
 }
 
