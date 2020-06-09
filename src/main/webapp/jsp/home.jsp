@@ -61,7 +61,7 @@
 							<div class="w3-container w3-center">
 								<h3>${currentEntrant.firstName}</h3>
 								<h3>${currentEntrant.lastName}</h3>
-								<p>${currentEntrant.faculty}</p>
+								<p>${currentEntrant.facultet}</p>
 								
 							</div>
 							<button class="w3-button w3-block w3-dark-grey">+ add to Faculty</button>
