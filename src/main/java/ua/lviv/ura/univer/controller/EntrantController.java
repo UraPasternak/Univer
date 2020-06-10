@@ -20,7 +20,7 @@ public class EntrantController {
 	@Autowired
 	EntrantService entrantService;
 	
-	@RequestMapping(value = "/addEntrant", method = RequestMethod.POST)
+	@RequestMapping(value = "/addEntrant", method = RequestMethod.GET)
 	public ModelAndView createEntrant(@Valid @ModelAttribute("entrant") Entrant entrant,
 			BindingResult bindingResult) {
 		
