@@ -13,12 +13,7 @@
 	<div class="container">
 
 		<!-- Sidebar -->
-		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
-			<h3 class="w3-bar-item">Menu</h3>
-			<a href="/home" class="w3-bar-item w3-button">Home</a>
-			<a href="/addEntrant" class="w3-bar-item w3-button">Create	entrant</a>
-			<a href="#" class="w3-bar-item w3-button">All entrants</a>
-		</div>
+		<jsp:include page='sidebar.jsp'/>
 
 
 		<!-- Page Content -->
@@ -41,25 +36,24 @@
 
 
 
-				<form:form method="POST" action="${contextPath}/addEntrant" modelAttribute="entrant">
-					<table>
-						<tr>
-							<td><form:label path="firstName">FirstName</form:label></td>
-							<td><form:input path="firstName" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="lastName">LastName</form:label></td>
-							<td><form:input path="lastName" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="faculty">Faculty</form:label></td>
-							<td><form:input path="faculty" /></td>
-						</tr>
-						
-						<tr>
-							<td><input type="submit" value="Submit" /></td>
-						</tr>
-					</table>
+				<form:form method="POST" modelAttribute="entrant">
+					<spring:bind path="firstName">
+			            <div class="form-group ${status.error ? 'has-error' : ''}">
+			                <form:input type="text" path="firstName" class="form-control" placeholder="First name"
+			                            autofocus="true"></form:input>
+			                <form:errors path="firstName"></form:errors>
+			            </div>
+			        </spring:bind>
+			
+			          <spring:bind path="lastName">
+			            <div class="form-group ${status.error ? 'has-error' : ''}">
+			                <form:input type="text" path="lastName" class="form-control" placeholder="Last name"
+			                            autofocus="true"></form:input>
+			                <form:errors path="lastName"></form:errors>
+			            </div>
+			        </spring:bind>
+			        
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				</form:form>

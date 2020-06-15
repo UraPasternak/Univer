@@ -1,9 +1,8 @@
 package ua.lviv.ura.univer.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +20,30 @@ public class EntrantController {
 	EntrantService entrantService;
 	
 	@RequestMapping(value = "/addEntrant", method = RequestMethod.GET)
-	public ModelAndView createEntrant(@Valid @ModelAttribute("entrant") Entrant entrant,
-			BindingResult bindingResult) {
+	public String registration(Model model) {
+		model.addAttribute("entrant", new Entrant());
 		
-		entrantService.save(entrant);
-		return new ModelAndView("redirect:/home");
+		return "addEntrant";
 	}
+	
+	 @RequestMapping(value ="/addEntrant", method = RequestMethod.POST)
+	 public String createEntrant(@ModelAttribute("entrant") Entrant entrant, BindingResult bindingResult, Model model) {
+		 if (bindingResult.hasErrors()) {
+	            return "addEntrant";
+	        }
+	     entrantService.save(entrant);
 
+
+	        return "redirect:/home";
+	    }
+	
+	   @RequestMapping(value ="/home", method = RequestMethod.GET)
+	    public ModelAndView welcome() {
+	    	ModelAndView map = new ModelAndView("home");
+			map.addObject("entrants", entrantService.getAllEntants());
+			
+	    	return map;
+	    }
+	    
+	   
 }

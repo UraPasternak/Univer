@@ -7,11 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import ua.lviv.ura.univer.domain.Entrant;
 import ua.lviv.ura.univer.domain.User;
-import ua.lviv.ura.univer.service.EntrantService;
 import ua.lviv.ura.univer.service.UserService;
 
 @Controller
@@ -19,11 +16,6 @@ public class UserController {
 	
     @Autowired
     private UserService userService;
-
-    
-    @Autowired
-    private EntrantService entrantService;
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -54,19 +46,5 @@ public class UserController {
 
         return "login";
     }
-
-    @RequestMapping(value ="/home", method = RequestMethod.GET)
-    public ModelAndView welcome() {
-    	ModelAndView map = new ModelAndView("home");
-		map.addObject("entrants", entrantService.getAllEntants());
-		
-    	return map;
-    }
-    
-    @RequestMapping(value ="/create-entrant", method = RequestMethod.GET)
-    public ModelAndView createEntrant() {
-        return new ModelAndView("createEntrant", "entrant", new Entrant());
-    }
-
 
 }

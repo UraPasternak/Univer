@@ -22,12 +22,7 @@
 <div class="container">
 
 		<!-- Sidebar -->
-		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
-			<h3 class="w3-bar-item">Menu</h3>
-			<a href="/home" class="w3-bar-item w3-button">Home</a>
-			<a href="/addEntrant" class="w3-bar-item w3-button">Create entrant</a>
-			<a href="#" class="w3-bar-item w3-button">All entrants</a>
-		</div>
+		<jsp:include page='sidebar.jsp'/>
 
 
 		<!-- Page Content -->
