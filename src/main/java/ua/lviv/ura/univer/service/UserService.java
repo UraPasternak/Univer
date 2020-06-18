@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import ua.lviv.ura.univer.dao.UserRepository;
@@ -12,6 +13,7 @@ import ua.lviv.ura.univer.domain.UserRole;
 
 
 @Service
+@Component
 public class UserService {
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	
@@ -27,5 +29,10 @@ public class UserService {
 		user.setRole(UserRole.ROLE_USER);
 		userRepository.save(user);
 		logger.debug("Save a new user " + user);
+	}
+	
+	public User findByEmail(String email) {
+		logger.debug("Selecting user with email " + email);
+		return userRepository.findByEmail(email).get();
 	}
 }
